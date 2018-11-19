@@ -48,7 +48,7 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 	/**
 	 * Wallet list.
 	 *
-	 * @var array
+	 * @var array|false
 	 */
 	private $wallet_list;
 
@@ -632,7 +632,7 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 						<tbody class="wallets">
 						<?php
 						$i = - 1;
-						if ( $this->wallet_list ) {
+						if ( ! empty( $this->wallet_list ) ) {
 							foreach ( $this->wallet_list as $wallet ) {
 								$i ++;
 
