@@ -27,14 +27,14 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 	/**
 	 * Instance of B2Binpay Currency
 	 *
-	 * @var \B2Binpay\Currency|null
+	 * @var \B2Binpay\Currency
 	 */
 	private $currency;
 
 	/**
 	 * Instance of B2BinPay AmountFactory.
 	 *
-	 * @var \B2Binpay\AmountFactory|null
+	 * @var \B2Binpay\AmountFactory
 	 */
 	private $amount_factory;
 
@@ -48,7 +48,7 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 	/**
 	 * Wallet list.
 	 *
-	 * @var mixed|void
+	 * @var array
 	 */
 	private $wallet_list;
 

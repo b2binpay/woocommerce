@@ -1,4 +1,4 @@
-=== B2BinPay Payments for WooCommercee ===
+=== B2BinPay Payments for WooCommerce ===
 Contributors: b2binpay
 Tags: ecommerce, e-commerce, commerce, wordpress ecommerce, bitcoin, litecoin, ethereum, ripple, monero, bitcoin cash, configurable, b2binpay
 Requires at least: 4.6
