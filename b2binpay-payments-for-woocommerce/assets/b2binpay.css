@@ -1,0 +1,15 @@
+#wc-b2binpay-form ul.b2binpay-currency-list {
+    margin: 0;
+}
+
+#wc-b2binpay-form li.b2binpay-currency-item {
+    list-style: none !important;
+    margin-left: 0;
+    position: relative;
+}
+
+#wc-b2binpay-form li.b2binpay-currency-item > label {
+    display: inline-block;
+    padding: 0.7em;
+    cursor: pointer;
+}

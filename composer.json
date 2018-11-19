@@ -1,0 +1,12 @@
+{
+    "name": "b2binpay/woocommerce",
+    "description": "B2BinPay Payments for WooCommerce",
+    "type": "wordpress-plugin",
+    "require": {
+        "b2binpay/api-php": "^1.0"
+    },
+    "license": "MIT",
+    "config": {
+        "vendor-dir": "b2binpay-payments-for-woocommerce/includes"
+    }
+}

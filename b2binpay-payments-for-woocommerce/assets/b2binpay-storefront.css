@@ -1,0 +1,26 @@
+#wc-b2binpay-form li.b2binpay-currency-item > .input-radio[name="b2binpay-crypto"] {
+    display: none;
+}
+
+#wc-b2binpay-form li.b2binpay-currency-item > input[type="radio"] + label::before {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 1;
+    vertical-align: -.125em;
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    line-height: inherit;
+    vertical-align: baseline;
+    content: "\f111";
+    margin-right: 0.7em;
+    -webkit-transition: color, ease, 0.2s;
+    transition: color, ease, 0.2s;
+}
+#wc-b2binpay-form li.b2binpay-currency-item > input[type="radio"]:checked + label::before {
+    content: "\f192";
+    color: #ff5929;
+}
