@@ -130,8 +130,8 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 		$this->order_statuses = $this->get_option( 'order_statuses' );
 
 		// B2BinPay wallet list.
-		$this->wallet_list = get_option(
-			'woocommerce_b2binpay_wallets',
+		$this->wallet_list = $this->get_option(
+			'wallet_list',
 			array(
 				array(
 					'id'             => $this->get_option( 'id' ),
@@ -169,14 +169,14 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 				'woocommerce_update_options_payment_gateways_' . $this->id,
 				array(
 					$this,
-					'save_wallet_list',
+					'save_order_statuses',
 				)
 			);
 			add_action(
 				'woocommerce_update_options_payment_gateways_' . $this->id,
 				array(
 					$this,
-					'save_order_statuses',
+					'save_wallet_list',
 				)
 			);
 		}
@@ -747,7 +747,7 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 			}
 		}
 
-		update_option( 'woocommerce_b2binpay_wallets', $wallets );
+		$this->update_option( 'wallet_list', $wallets );
 	}
 
 	/**
@@ -859,9 +859,7 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 		// Get WC default statuses.
 		$wc_statuses = wc_get_order_statuses();
 
-		// Get previously stored statuses from WP settings.
-		$b2binpay_settings = get_option( 'woocommerce_b2binpay_settings' );
-		$order_statuses    = $b2binpay_settings['order_statuses'];
+		$order_statuses = [];
 
 		foreach ( $this->api_bull_statuses as $api_status_name => $api_status_title ) {
 			if ( empty( $_POST[ 'b2binpay_order_status__' . $api_status_name ] ) ) {
@@ -878,8 +876,7 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 		}
 
 		// Store new order statuses in WP settings.
-		$b2binpay_settings['order_statuses'] = $order_statuses;
-		update_option( 'woocommerce_b2binpay_settings', $b2binpay_settings );
+		$this->update_option( 'order_statuses', $order_statuses );
 	}
 
 	/**
