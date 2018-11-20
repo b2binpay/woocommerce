@@ -27,7 +27,7 @@ B2BinPay allows you to accept Crypto on your store & Receive Crypto or FIAT Sett
 
 ### Manual installation
 
-1. Unpack the download package
+1. Unpack the download package from [WordPress.org](https://wordpress.org/plugins/b2binpay-payments-for-woocommerce/)
 2. Upload the directory 'b2binpay-payments-for-woocommerce' to the `/wp-content/plugins/` directory
 3. Activate the 'B2BinPay Payments for WooCommerce' plugin through the 'Plugins' menu in WordPress.
 4. Get API Credentials in [b2binpay.com](https://www.b2binpay.com/)
