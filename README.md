@@ -2,6 +2,8 @@
 
 Accept Bitcoin, Bitcoin Cash, Litecoin, Ethereum, and other CryptoCurrencies via B2BinPay on your WooCommerce store.
 
+[![Build Status](https://travis-ci.org/b2binpay/woocommerce.svg?branch=master)](https://travis-ci.org/b2binpay/woocommerce)
+
 ## Description
 
 This is a [B2BinPay](https://www.b2binpay.com/) Payment Gateway for WooCommerce.
