@@ -2,7 +2,7 @@
 Contributors: b2binpay
 Tags: ecommerce, e-commerce, commerce, wordpress ecommerce, bitcoin, litecoin, ethereum, ripple, monero, bitcoin cash, configurable, b2binpay
 Requires at least: 4.6
-Tested up to: 4.9
+Tested up to: 5.0
 Stable tag: trunk
 Requires PHP: 7.0
 License: MIT
@@ -18,7 +18,7 @@ B2BinPay allows you to accept Crypto on your store & Receive Crypto or FIAT Sett
 
 = Available CryptoCurrencies =
 
-Bitcoin, Bitcoin Cash, Ethereum, DASH, Litecoin, Monero, NEO, NEM, Ripple, B2BX, and any ERC20, NEO tokens
+Bitcoin, Bitcoin Cash, Ethereum, DASH, Litecoin, Monero, NEO, NEM, Ripple, B2BX, and any ERC20, NEO tokens.
 
 = Our Fees =
 
