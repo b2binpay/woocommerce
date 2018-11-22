@@ -48,7 +48,7 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 	/**
 	 * Wallet list.
 	 *
-	 * @var array|false
+	 * @var array
 	 */
 	private $wallet_list;
 
@@ -76,7 +76,7 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 	/**
 	 * B2BinPay API statuses compared to WC order statuses.
 	 *
-	 * @var array|false
+	 * @var array
 	 */
 	private $order_statuses;
 
@@ -127,10 +127,10 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 		// Payment params.
 		$this->order_lifetime = (int) $this->get_option( 'order_lifetime' );
 		$this->markup         = (int) $this->get_option( 'markup' );
-		$this->order_statuses = $this->get_option( 'order_statuses' );
+		$this->order_statuses = (array) $this->get_option( 'order_statuses' );
 
 		// B2BinPay wallet list.
-		$this->wallet_list = $this->get_option(
+		$this->wallet_list = (array) $this->get_option(
 			'wallet_list',
 			array(
 				array(
