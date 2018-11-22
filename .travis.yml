@@ -16,6 +16,9 @@ php:
 before_script:
   - bash tests/bin/install.sh woocommerce_test root '' localhost trunk
   - git clone https://github.com/woocommerce/woocommerce.git
-  - composer require "phpunit/phpunit:6.*"
+  - composer require "phpunit/phpunit:6.*" "php-coveralls/php-coveralls"
 
 script: b2binpay-payments-for-woocommerce/includes/bin/phpunit
+
+after_success:
+- travis_retry php b2binpay-payments-for-woocommerce/includes/bin/php-coveralls

@@ -76,7 +76,7 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 	/**
 	 * B2BinPay API statuses compared to WC order statuses.
 	 *
-	 * @var string
+	 * @var array|false
 	 */
 	private $order_statuses;
 
@@ -185,7 +185,7 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 		add_action( 'wp_enqueue_scripts', array( $this, 'payment_scripts' ) );
 
 		// Callback processing function.
-		add_action( 'woocommerce_api_wc_gateway_' . $this->id, array( $this, 'b2binpay_return_handler' ) );
+		add_action( 'woocommerce_api_wc_gateway_' . $this->id, array( $this, 'return_handler' ) );
 	}
 
 	/**
@@ -300,7 +300,7 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 		}
 
 		// Show form if there are any saved wallets.
-		if ( ! empty( $this->wallet_list ) ) {
+		if ( ! empty( $this->wallet_list ) && ! empty( $this->wallet_list[0]['id'] ) ) {
 			$this->select_currency_form();
 		}
 	}
@@ -381,9 +381,7 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 		if ( empty( $this->wallet ) ) {
 			wc_add_notice( __( 'Unknown currency: ' . $wallet_id, 'b2binpay-payments-for-woocommerce' ), 'error' );
 
-			return array(
-				'result' => 'fail',
-			);
+			return false;
 		}
 
 		return true;
@@ -471,7 +469,7 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 	/**
 	 * Process API callback
 	 */
-	public function b2binpay_return_handler() {
+	public function return_handler() {
 		$headers = $this->get_headers();
 
 		// Check authorisation.
@@ -495,15 +493,10 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 		// Get WC Order.
 		$order = wc_get_order( $order_id );
 
-		// Get B2BinPay order statuses.
-		$order_statuses = $this->get_option( 'order_statuses' );
-
-		// Get current status.
-		$update_status = $order_statuses[ $bill_status ];
+		$change_status = true;
 
 		switch ( (string) $bill_status ) {
 			case '-2':
-				$order->update_status( $update_status );
 				$order->add_order_note(
 					sprintf(
 						/* translators: %s: bill id */
@@ -514,7 +507,6 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 				break;
 
 			case '-1':
-				$order->update_status( $update_status );
 				$order->add_order_note(
 					sprintf(
 						/* translators: %s: bill id */
@@ -538,10 +530,6 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 				if ( $amount === $actual_amount ) {
 					// Complete WC payment.
 					$order->payment_complete();
-
-					if ( $order->get_status() !== $update_status ) {
-						$order->update_status( $update_status );
-					}
 
 					$order->add_order_note(
 						sprintf(
@@ -576,11 +564,12 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 							$bill_id
 						)
 					);
+
+					$change_status = false;
 				}
 				break;
 
 			case '3':
-				$order->update_status( $update_status );
 				$order->add_order_note(
 					sprintf(
 						/* translators: %s: bill id */
@@ -591,7 +580,6 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 				break;
 
 			case '4':
-				$order->update_status( $update_status );
 				$order->add_order_note(
 					sprintf(
 						/* translators: %s: bill id */
@@ -600,6 +588,11 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 					)
 				);
 				break;
+		}
+
+		// Update Order status.
+		if ( $change_status && ! empty ( $this->order_statuses[ $bill_status ] ) ) {
+			$order->update_status( $this->order_statuses[ $bill_status ] );
 		}
 
 		header( 'HTTP/1.1 200 OK' );
@@ -803,10 +796,10 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 		$wc_statuses = wc_get_order_statuses();
 
 		// Get WP settings.
-		$b2binpay_settings = get_option( 'woocommerce_b2binpay_settings' );
+		$order_statuses = $this->get_option( 'order_statuses' );
 
 		// Get previously selected statuses.
-		$current_statuses = ( empty( $b2binpay_settings['order_statuses'] ) ) ? $default_statuses : $b2binpay_settings['order_statuses'];
+		$current_statuses = ( empty( $order_statuses ) ) ? $default_statuses : $order_statuses;
 
 		?>
 		<tr valign="top">

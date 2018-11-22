@@ -14,4 +14,12 @@
             <directory prefix="test-" suffix=".php">./tests/phpunit</directory>
         </testsuite>
     </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <file>b2binpay-payments-for-woocommerce/class-wc-gateway-b2binpay.php</file>
+        </whitelist>
+    </filter>
+    <logging>
+        <log type="coverage-clover" target="build/logs/clover.xml"/>
+    </logging>
 </phpunit>
