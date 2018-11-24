@@ -2,7 +2,7 @@
 /**
  * Plugin Name: B2BinPay Payments for WooCommerce
  * Plugin URI: https://wordpress.org/plugin/b2binpay-payments-for-woocommerce
- * Description: Accept Bitcoin, Bitcoin Cash, Litecoin, Ethereum and other CryptoCurrencies via B2BinPay (https://www.b2binpay.com).
+ * Description: Accept Bitcoin, Bitcoin Cash, Litecoin, Ethereum and other CryptoCurrencies via B2BinPay.
  * Version: 1.0.0
  * Author: B2BinPay
  * Author URI: https://www.b2binpay.com

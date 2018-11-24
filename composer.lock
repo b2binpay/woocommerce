@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "b2binpay/api-php",
-            "version": "1.0.0",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/b2binpay/api-php.git",
-                "reference": "a89df4b1dfc04fad59fcc3ae4e21de26c4d7548e"
+                "reference": "2c29eb85cd3eb61283c8c3b95e16036c607049a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/b2binpay/api-php/zipball/a89df4b1dfc04fad59fcc3ae4e21de26c4d7548e",
-                "reference": "a89df4b1dfc04fad59fcc3ae4e21de26c4d7548e",
+                "url": "https://api.github.com/repos/b2binpay/api-php/zipball/2c29eb85cd3eb61283c8c3b95e16036c607049a3",
+                "reference": "2c29eb85cd3eb61283c8c3b95e16036c607049a3",
                 "shasum": ""
             },
             "require": {
@@ -42,8 +42,8 @@
             "license": [
                 "MIT"
             ],
-            "description": "PHP client for B2BinPAY",
-            "time": "2018-11-13T15:14:14+00:00"
+            "description": "PHP client for B2BinPay",
+            "time": "2018-11-23T12:37:40+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",

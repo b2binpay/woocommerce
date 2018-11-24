@@ -95,6 +95,20 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 	);
 
 	/**
+	 * Default B2BinPay / WC statuses.
+	 *
+	 * @var array
+	 */
+	private $default_statuses = array(
+		'1'  => 'wc-pending',
+		'2'  => 'wc-processing',
+		'4'  => 'wc-processing',
+		'-1' => 'wc-cancelled',
+		'-2' => 'wc-failed',
+		'3'  => 'wc-failed',
+	);
+
+	/**
 	 * WC_Gateway_B2Binpay constructor.
 	 *
 	 * @param \B2Binpay\Provider|null      $provider B2BinPay Provider.
@@ -223,7 +237,7 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 				'title'       => __( 'Test (Sandbox)', 'b2binpay-payments-for-woocommerce' ),
 				'type'        => 'checkbox',
 				'label'       => __( 'Enable Test Mode (Sandbox)', 'b2binpay-payments-for-woocommerce' ),
-				'default'     => 'no',
+				'default'     => 'yes',
 				'description' => sprintf(
 					__( 'To test on Sandbox, turn Test Mode "On"', 'b2binpay-payments-for-woocommerce' )
 				) . '<br />' . __( 'Warning: Sandbox and main gateway has their own pairs of key and secret!', 'b2binpay-payments-for-woocommerce' ),
@@ -517,6 +531,7 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 				break;
 
 			case '1':
+				$change_status = false;
 				break;
 
 			case '2':
@@ -764,8 +779,8 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 				'admin_notices',
 				function () {
 					echo '<div class="notice notice-error is-dismissible"><p>'
-						. __( 'B2BinPay error: Wrong key/secret pair.', 'b2binpay-payments-for-woocommerce' )
-						. '</p></div>';
+					     . __( 'B2BinPay error: Wrong key/secret pair.', 'b2binpay-payments-for-woocommerce' )
+					     . '</p></div>';
 				}
 			);
 
@@ -783,15 +798,6 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 	public function generate_order_statuses_html() {
 		ob_start();
 
-		$default_statuses = array(
-			'1'  => 'wc-pending',
-			'2'  => 'wc-processing',
-			'4'  => 'wc-processing',
-			'-1' => 'wc-cancelled',
-			'-2' => 'wc-failed',
-			'3'  => 'wc-failed',
-		);
-
 		// Get WC default statuses.
 		$wc_statuses = wc_get_order_statuses();
 
@@ -799,7 +805,7 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 		$order_statuses = $this->get_option( 'order_statuses' );
 
 		// Get previously selected statuses.
-		$current_statuses = ( empty( $order_statuses ) ) ? $default_statuses : $order_statuses;
+		$current_statuses = ( empty( $order_statuses ) ) ? $this->default_statuses : $order_statuses;
 
 		?>
 		<tr valign="top">
