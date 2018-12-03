@@ -499,7 +499,7 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 		}
 
 		$bill_id     = $_POST['id'];
-		$bill_status = $_POST['status'];
+		$bill_status = (string) $_POST['status'];
 
 		// Get WC Order ID from tracking id.
 		$order_id = $_POST['tracking_id'];
@@ -507,111 +507,86 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 		// Get WC Order.
 		$order = wc_get_order( $order_id );
 
-		$change_status = true;
+		// If bill was paid.
+		if ( '2' == $bill_status ) {
+			$amount         = $_POST['amount'];
+			$actual_amount  = $_POST['actual_amount'];
+			$currency_iso   = $_POST['currency']['iso'];
+			$currency_alpha = $_POST['currency']['alpha'];
+			$pow            = $_POST['pow'];
 
-		switch ( (string) $bill_status ) {
-			case '-2':
+			// Check if all requested amount fulfilled.
+			if ( $amount === $actual_amount ) {
+				// Complete WC payment.
+				$order->payment_complete();
+
 				$order->add_order_note(
 					sprintf(
-						/* translators: %s: bill id */
-						__( 'B2BinPay payment error! Bill ID: %s', 'b2binpay-payments-for-woocommerce' ),
+					/* translators: %s: bill id */
+						__( 'B2BinPay payment complete! Bill ID: %s', 'b2binpay-payments-for-woocommerce' ),
 						$bill_id
 					)
 				);
-				break;
+			} else {
+				// Generate actual amount from post-data.
+				$b2binpay_actual_amount = $this->amount_factory->create(
+					$actual_amount,
+					$currency_iso,
+					$pow
+				);
 
-			case '-1':
+				// Generate requested amount from post-data.
+				$b2binpay_requested_amount = $this->amount_factory->create(
+					$amount,
+					$currency_iso,
+					$pow
+				);
+
 				$order->add_order_note(
 					sprintf(
-						/* translators: %s: bill id */
-						__( 'B2BinPay payment expired! Bill ID: %s', 'b2binpay-payments-for-woocommerce' ),
+					/* translators: %1$s: amount %2$s: currency %3$s: amount %4$s: currency %5$s: bill id */
+						__( 'B2BinPay received payment. Current amount: %1$s %2$s. Requested amount: %3$s %4$s. Bill ID: %5$s', 'b2binpay-payments-for-woocommerce' ),
+						$b2binpay_actual_amount->getValue(),
+						$currency_alpha,
+						$b2binpay_requested_amount->getValue(),
+						$currency_alpha,
 						$bill_id
 					)
 				);
-				break;
-
-			case '1':
-				$change_status = false;
-				break;
-
-			case '2':
-				$amount         = $_POST['amount'];
-				$actual_amount  = $_POST['actual_amount'];
-				$currency_iso   = $_POST['currency']['iso'];
-				$currency_alpha = $_POST['currency']['alpha'];
-				$pow            = $_POST['pow'];
-
-				// Check if all requested amount fulfilled.
-				if ( $amount === $actual_amount ) {
-					// Complete WC payment.
-					$order->payment_complete();
-
-					$order->add_order_note(
-						sprintf(
-							/* translators: %s: bill id */
-							__( 'B2BinPay payment complete! Bill ID: %s', 'b2binpay-payments-for-woocommerce' ),
-							$bill_id
-						)
-					);
-				} else {
-					// Generate actual amount from post-data.
-					$b2binpay_actual_amount = $this->amount_factory->create(
-						$actual_amount,
-						$currency_iso,
-						$pow
-					);
-
-					// Generate requested amount from post-data.
-					$b2binpay_requested_amount = $this->amount_factory->create(
-						$amount,
-						$currency_iso,
-						$pow
-					);
-
-					$order->add_order_note(
-						sprintf(
-							/* translators: %1$s: amount %2$s: currency %3$s: amount %4$s: currency %5$s: bill id */
-							__( 'B2BinPay received payment. Current amount: %1$s %2$s. Requested amount: %3$s %4$s. Bill ID: %5$s', 'b2binpay-payments-for-woocommerce' ),
-							$b2binpay_actual_amount->getValue(),
-							$currency_alpha,
-							$b2binpay_requested_amount->getValue(),
-							$currency_alpha,
-							$bill_id
-						)
-					);
-
-					$change_status = false;
-				}
-				break;
-
-			case '3':
-				$order->add_order_note(
-					sprintf(
-						/* translators: %s: bill id */
-						__( 'B2BinPay payment freeze! Bill ID: %s', 'b2binpay-payments-for-woocommerce' ),
-						$bill_id
-					)
-				);
-				break;
-
-			case '4':
-				$order->add_order_note(
-					sprintf(
-						/* translators: %s: bill id */
-						__( 'B2BinPay payment closed! Bill ID: %s', 'b2binpay-payments-for-woocommerce' ),
-						$bill_id
-					)
-				);
-				break;
+			}
 		}
 
-		// Update Order status.
-		if ( $change_status && ! empty ( $this->order_statuses[ $bill_status ] ) ) {
+		// Get status messages array.
+		$status_messages = $this->get_status_messages();
+
+		// Update order status and message.
+		if ( ! empty ( $status_messages[ $bill_status ] ) ) {
+			$order->add_order_note(
+				sprintf(
+					$status_messages[ $bill_status ],
+					$bill_id
+				)
+			);
+
 			$order->update_status( $this->order_statuses[ $bill_status ] );
 		}
 
 		header( 'HTTP/1.1 200 OK' );
 		exit( 'OK' );
+	}
+
+	/**
+	 * Get status messages.
+	 *
+	 * @return array
+	 */
+	public function get_status_messages() {
+		return array(
+			'-2' => __( 'B2BinPay payment error! Bill ID: %s', 'b2binpay-payments-for-woocommerce' ),
+			'-1' => __( 'B2BinPay payment expired! Bill ID: %s', 'b2binpay-payments-for-woocommerce' ),
+			'3'  => __( 'B2BinPay payment freeze! Bill ID: %s', 'b2binpay-payments-for-woocommerce' ),
+			'4'  => __( 'B2BinPay payment closed! Bill ID: %s', 'b2binpay-payments-for-woocommerce' )
+		);
 	}
 
 	/**
