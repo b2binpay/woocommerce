@@ -29,7 +29,7 @@ We are proud to provide one of the best CryptoCurrency Payment Solution with the
 = Minimum Requirements =
 
 * PHP version 7.0 or greater
-* PHP extensions enabled: cURL, JSON
+* PHP extensions enabled: BCMath, cURL, JSON
 * WordPress 4.6 or greater
 * WooCommerce 2.2.0 or greater
 
