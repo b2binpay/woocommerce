@@ -13,14 +13,10 @@ php:
   - 7.2
   - 7.3
 
-matrix:
-  allow_failures:
-    - php: 7.3
-
 before_script:
   - bash tests/bin/install.sh woocommerce_test root '' localhost latest
   - git clone https://github.com/woocommerce/woocommerce.git
-  - composer require "phpunit/phpunit:6.*" "php-coveralls/php-coveralls"
+  - composer require "php-coveralls/php-coveralls"
 
 script: b2binpay-payments-for-woocommerce/includes/bin/phpunit
 

@@ -484,7 +484,7 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 	 * Process API callback
 	 */
 	public function return_handler() {
-		$headers = $this->get_headers();
+		$headers = getallheaders();
 
 		// Check authorisation.
 		if ( empty( $headers['Authorization'] ) || ( $headers['Authorization'] !== $this->provider->getAuthorization() ) ) {
@@ -851,29 +851,5 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 
 		// Store new order statuses in WP settings.
 		$this->update_option( 'order_statuses', $order_statuses );
-	}
-
-	/**
-	 * Get request headers on Apache2 / Nginx
-	 *
-	 * @return array
-	 */
-	public function get_headers() {
-		if ( function_exists( 'getallheaders' ) ) {
-			return getallheaders();
-		} else {
-			if ( ! is_array( $_SERVER ) ) {
-				return array();
-			}
-			$headers = array();
-			foreach ( $_SERVER as $name => $value ) {
-				if ( substr( $name, 0, 5 ) === 'HTTP_' ) {
-					$key             = str_replace( ' ', '-', ucwords( strtolower( str_replace( '_', ' ', substr( $name, 5 ) ) ) ) );
-					$headers[ $key ] = $value;
-				}
-			}
-
-			return $headers;
-		}
 	}
 }
