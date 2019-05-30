@@ -5,7 +5,7 @@
  * Description: Accept Bitcoin, Bitcoin Cash, Litecoin, Ethereum and other CryptoCurrencies via B2BinPay.
  * Version: 1.0.2
  * Author: B2BinPay
- * Author URI: https://www.b2binpay.com
+ * Author URI: https://b2binpay.com
  * License: MIT
  * License URI: https://github.com/b2binpay/woocommerce/blob/master/LICENSE
  * Text Domain: b2binpay-payments-for-woocommerce

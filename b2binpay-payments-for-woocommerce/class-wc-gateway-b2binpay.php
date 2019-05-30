@@ -286,7 +286,7 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 			printf(
 				/* translators: %s: link to B2BinPay */
 				__( 'Accept Bitcoin, Bitcoin Cash, Litecoin, Ethereum &amp; more through %s', 'b2binpay-payments-for-woocommerce' ),
-				'<a href="https://www.b2binpay.com" target="_blank">B2BinPay</a>'
+				'<a href="https://b2binpay.com" target="_blank">B2BinPay</a>'
 			);
 			?>
 			<br/>
@@ -294,7 +294,7 @@ class WC_Gateway_B2Binpay extends WC_Payment_Gateway {
 			printf(
 				/* translators: %1$s: open link tag %2$s: close link tag */
 				__( 'Check out the list of %1$sAvailable CryptoCurrencies%2$s', 'b2binpay-payments-for-woocommerce' ),
-				'<a href="https://www.b2binpay.com/#CryptoCurrencies" target="_blank">',
+				'<a href="https://b2binpay.com/#CryptoCurrencies" target="_blank">',
 				'</a>'
 			);
 			?>

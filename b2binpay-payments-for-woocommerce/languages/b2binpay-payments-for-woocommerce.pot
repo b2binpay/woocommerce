@@ -211,5 +211,5 @@ msgid "B2BinPay"
 msgstr ""
 
 #. Author URI of the plugin/theme
-msgid "https://www.b2binpay.com"
+msgid "https://b2binpay.com"
 msgstr ""

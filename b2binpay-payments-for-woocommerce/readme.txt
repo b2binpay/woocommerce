@@ -2,7 +2,7 @@
 Contributors: b2binpay
 Tags: ecommerce, e-commerce, commerce, wordpress ecommerce, bitcoin, litecoin, ethereum, ripple, monero, bitcoin cash, configurable, b2binpay
 Requires at least: 4.6
-Tested up to: 5.1
+Tested up to: 5.2
 Stable tag: trunk
 Requires PHP: 7.0
 License: MIT
@@ -12,7 +12,7 @@ Accept Bitcoin, Bitcoin Cash, Litecoin, Ethereum, and other CryptoCurrencies via
 
 == Description ==
 
-This is a [B2BinPay](https://www.b2binpay.com/) Payment Gateway for WooCommerce.
+This is a [B2BinPay](https://b2binpay.com/) Payment Gateway for WooCommerce.
 
 B2BinPay allows you to accept Crypto on your store & Receive Crypto or FIAT Settlements directly into your Bank Account.
 
@@ -37,7 +37,7 @@ We are proud to provide one of the best CryptoCurrency Payment Solution with the
 
 1. Install the plugin via Plugins -> New plugin. Search for 'B2BinPay Payments for WooCommerce'.
 2. Activate the 'B2BinPay Payments for WooCommerce' plugin through the 'Plugins' menu in WordPress.
-3. Get API Credentials in [b2binpay.com](https://www.b2binpay.com/)
+3. Get API Credentials in [b2binpay.com](https://b2binpay.com/)
 4. Set your B2BinPay API key and secret at WooCommerce -> Settings -> Payments -> B2BinPay -> Set up
 5. You're done.
 
@@ -46,7 +46,7 @@ We are proud to provide one of the best CryptoCurrency Payment Solution with the
 1. Unpack the download package
 2. Upload the directory 'b2binpay-payments-for-woocommerce' to the `/wp-content/plugins/` directory
 3. Activate the 'B2BinPay Payments for WooCommerce' plugin through the 'Plugins' menu in WordPress.
-4. Get API Credentials in [b2binpay.com](https://www.b2binpay.com/)
+4. Get API Credentials in [b2binpay.com](https://b2binpay.com/)
 5. Set your B2BinPay API key and secret at WooCommerce -> Settings -> Payments -> B2BinPay -> Set up
 6. You're done.
 
@@ -54,7 +54,7 @@ We are proud to provide one of the best CryptoCurrency Payment Solution with the
 
 = Does this support both production mode and sandbox mode for testing? =
 
-Yes, it does. But you need to get API Credentials from [b2binpay.com](https://www.b2binpay.com/) for each production and sandbox mode.
+Yes, it does. But you need to get API Credentials from [b2binpay.com](https://b2binpay.com/) for each production and sandbox mode.
 
 = Will this plugin work with my theme? =
 

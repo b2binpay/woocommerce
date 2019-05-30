@@ -6,7 +6,7 @@ Accept Bitcoin, Bitcoin Cash, Litecoin, Ethereum, and other CryptoCurrencies via
 
 ## Description
 
-This is a [B2BinPay](https://www.b2binpay.com/) Payment Gateway for WooCommerce.
+This is a [B2BinPay](https://b2binpay.com/) Payment Gateway for WooCommerce.
 
 B2BinPay allows you to accept Crypto on your store & Receive Crypto or FIAT Settlements directly into your Bank Account.
 
@@ -23,7 +23,7 @@ B2BinPay allows you to accept Crypto on your store & Receive Crypto or FIAT Sett
 
 1. Install the plugin via Plugins -> New plugin. Search for 'B2BinPay Payments for WooCommerce'.
 2. Activate the 'B2BinPay Payments for WooCommerce' plugin through the 'Plugins' menu in WordPress.
-3. Get API Credentials in [b2binpay.com](https://www.b2binpay.com/)
+3. Get API Credentials in [b2binpay.com](https://b2binpay.com/)
 4. Set your B2BinPay API key and secret at WooCommerce -> Settings -> Payments -> B2BinPay -> Set up
 5. You're done.
 
@@ -32,7 +32,7 @@ B2BinPay allows you to accept Crypto on your store & Receive Crypto or FIAT Sett
 1. Unpack the download package from [WordPress.org](https://wordpress.org/plugins/b2binpay-payments-for-woocommerce/)
 2. Upload the directory 'b2binpay-payments-for-woocommerce' to the `/wp-content/plugins/` directory
 3. Activate the 'B2BinPay Payments for WooCommerce' plugin through the 'Plugins' menu in WordPress.
-4. Get API Credentials in [b2binpay.com](https://www.b2binpay.com/)
+4. Get API Credentials in [b2binpay.com](https://b2binpay.com/)
 5. Set your B2BinPay API key and secret at WooCommerce -> Settings -> Payments -> B2BinPay -> Set up
 6. You're done.
 
@@ -40,7 +40,7 @@ B2BinPay allows you to accept Crypto on your store & Receive Crypto or FIAT Sett
 
 #### Does this support both production mode and sandbox mode for testing?
 
-Yes, it does. But you need to get API Credentials from [b2binpay.com](https://www.b2binpay.com/) for each production and sandbox mode.
+Yes, it does. But you need to get API Credentials from [b2binpay.com](https://b2binpay.com/) for each production and sandbox mode.
 
 #### Will this plugin work with my theme?
 
