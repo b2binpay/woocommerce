@@ -127,7 +127,7 @@ install_woocommerce() {
 
 	git clone https://github.com/woocommerce/woocommerce.git
 	cd woocommerce/
-	php ~/composer.phar install
+	composer install
 }
 
 install_wp
