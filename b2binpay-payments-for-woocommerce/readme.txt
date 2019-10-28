@@ -2,7 +2,7 @@
 Contributors: b2binpay
 Tags: ecommerce, e-commerce, commerce, wordpress ecommerce, bitcoin, litecoin, ethereum, ripple, monero, bitcoin cash, configurable, b2binpay
 Requires at least: 4.6
-Tested up to: 5.2
+Tested up to: 5.3
 Stable tag: trunk
 Requires PHP: 7.0
 License: MIT
