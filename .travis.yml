@@ -18,7 +18,6 @@ services:
 
 before_script:
   - bash tests/bin/install.sh woocommerce_test root '' localhost latest
-  - git clone https://github.com/woocommerce/woocommerce.git
   - composer require "php-coveralls/php-coveralls"
 
 script: b2binpay-payments-for-woocommerce/includes/bin/phpunit
