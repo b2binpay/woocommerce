@@ -13,6 +13,9 @@ php:
   - 7.2
   - 7.3
 
+services:
+  - mysql
+
 before_script:
   - bash tests/bin/install.sh woocommerce_test root '' localhost latest
   - git clone https://github.com/woocommerce/woocommerce.git
